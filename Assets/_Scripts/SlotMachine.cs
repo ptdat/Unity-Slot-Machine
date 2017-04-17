@@ -89,6 +89,7 @@ public class SlotMachine : MonoBehaviour {
 			Debug.Log("You Won the $" + jackpot + " Jackpot!!");
 			playerMoney += jackpot;
 			jackpot = 1000;
+
 		}
 	}
 
@@ -127,40 +128,60 @@ public class SlotMachine : MonoBehaviour {
 		{
 			outCome[spin] = Random.Range(1,65);
 
-			if (checkRange(outCome[spin], 1, 27)) {  // 41.5% probability
-				betLine[spin] = "blank";
-				blanks++;
-			}
-			else if (checkRange(outCome[spin], 28, 37)){ // 15.4% probability
-				betLine[spin] = "Grapes";
-				grapes++;
-			}
-			else if (checkRange(outCome[spin], 38, 46)){ // 13.8% probability
-				betLine[spin] = "Banana";
-				bananas++;
-			}
-			else if (checkRange(outCome[spin], 47, 54)){ // 12.3% probability
-				betLine[spin] = "Orange";
-				oranges++;
-			}
-			else if (checkRange(outCome[spin], 55, 59)){ //  7.7% probability
-				betLine[spin] = "Cherry";
-				cherries++;
-			}
-			else if (checkRange(outCome[spin], 60, 62)){ //  4.6% probability
-				betLine[spin] = "Bar";
-				bars++;
-			}
-			else if (checkRange(outCome[spin], 63, 64)){ //  3.1% probability
-				betLine[spin] = "Bell";
-				bells++;
-			}
-			else if (checkRange(outCome[spin], 65, 65)){ //  1.5% probability
-				betLine[spin] = "Seven";
-				sevens++;
-			}
+            if (checkRange(outCome[spin], 1, 27))
+            {  // 41.5% probability
+                betLine[spin] = "blank";
+                blanks++;
+                GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("blank", typeof(Sprite)) as Sprite;
+            }
+            else if (checkRange(outCome[spin], 28, 37))
+            { // 15.4% probability
+                betLine[spin] = "Grapes";
+                grapes++;
+                GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("grapes", typeof(Sprite)) as Sprite;
+            }
+            else if (checkRange(outCome[spin], 38, 46))
+            { // 13.8% probability
+                betLine[spin] = "Banana";
+                bananas++;
+                GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("banana", typeof(Sprite)) as Sprite;
+            }
+            else if (checkRange(outCome[spin], 47, 54))
+            { // 12.3% probability
+                betLine[spin] = "Orange";
+                oranges++;
+                GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("orange", typeof(Sprite)) as Sprite;
+            }
+            else if (checkRange(outCome[spin], 55, 59))
+            { //  7.7% probability
+                betLine[spin] = "Cherry";
+                cherries++;
+                GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("cherry", typeof(Sprite)) as Sprite;
+            }
+            else if (checkRange(outCome[spin], 60, 62))
+            { //  4.6% probability
+                betLine[spin] = "Bar";
+                bars++;
+                GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("bar", typeof(Sprite)) as Sprite;
+            }
+            else if (checkRange(outCome[spin], 63, 64))
+            { //  3.1% probability
+                betLine[spin] = "Bell";
+                bells++;
+                bars++;
+                GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("bell", typeof(Sprite)) as Sprite;
 
-		}
+            }
+            else if (checkRange(outCome[spin], 65, 65))
+            { //  1.5% probability
+                betLine[spin] = "Seven";
+                sevens++;
+                bars++;
+                GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("seven", typeof(Sprite)) as Sprite;
+
+            }
+
+        }
 		return betLine;
 	}
 
