@@ -39,7 +39,7 @@ public class SlotMachine : MonoBehaviour {
 
 
     /* Utility function to show Player Stats */
-    private void showPlayerStats()
+    private void _showPlayerStats()
 	{
 		winRatio = winNumber / turn;
 		lossRatio = lossNumber / turn;
@@ -55,7 +55,7 @@ public class SlotMachine : MonoBehaviour {
 	}
 
 	/* Utility function to reset all fruit tallies*/
-	private void resetFruitTally()
+	private void _resetFruitTally()
 	{
 		grapes = 0;
 		bananas = 0;
@@ -81,7 +81,7 @@ public class SlotMachine : MonoBehaviour {
 	}
 
 	/* Check to see if the player won the jackpot */
-	private void checkJackPot()
+	private void _checkJackPot()
 	{
 		/* compare two random values */
 		var jackPotTry = Random.Range (1, 51);
@@ -90,6 +90,7 @@ public class SlotMachine : MonoBehaviour {
 		{
 			Debug.Log("You Won the $" + jackpot + " Jackpot!!");
 			playerMoney += jackpot;
+            //dialog box to for wining the jackpot
             EditorUtility.DisplayDialog("Jackpot", "You win a jackpot of " + jackpot, "ok");
             jackpot = 1000;
 
@@ -98,24 +99,24 @@ public class SlotMachine : MonoBehaviour {
 	}
 
 	/* Utility function to show a win message and increase player money */
-	private void showWinMessage()
+	private void _showWinMessage()
 	{
 		playerMoney += winnings;
 		Debug.Log("You Won: $" + winnings);
-		resetFruitTally();
-		checkJackPot();
+		_resetFruitTally();
+		_checkJackPot();
     }
 
 	/* Utility function to show a loss message and reduce player money */
-	private void showLossMessage()
+	private void _showLossMessage()
 	{
 		playerMoney -= playerBet;
 		Debug.Log("You Lost!");
-		resetFruitTally();
+		_resetFruitTally();
 	}
 
 	/* Utility function to check if a value falls within a range of bounds */
-	private bool checkRange(int value, int lowerBounds, int upperBounds)
+	private bool _checkRange(int value, int lowerBounds, int upperBounds)
 	{
 		return (value >= lowerBounds && value <= upperBounds) ? true : false;
 
@@ -123,7 +124,7 @@ public class SlotMachine : MonoBehaviour {
 
 	/* When this function is called it determines the betLine results.
     e.g. Bar - Orange - Banana */
-	private string[] Reels()
+	private string[] _Reels()
 	{
 		string[] betLine = { " ", " ", " " };
 		int[] outCome = { 0, 0, 0 };
@@ -132,43 +133,43 @@ public class SlotMachine : MonoBehaviour {
 		{
 			outCome[spin] = Random.Range(1,65);
 
-            if (checkRange(outCome[spin], 1, 27))
+            if (_checkRange(outCome[spin], 1, 27))
             {  // 41.5% probability
                 betLine[spin] = "blank";
                 blanks++;
                 GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("blank", typeof(Sprite)) as Sprite;
             }
-            else if (checkRange(outCome[spin], 28, 37))
+            else if (_checkRange(outCome[spin], 28, 37))
             { // 15.4% probability
                 betLine[spin] = "Grapes";
                 grapes++;
                 GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("grapes", typeof(Sprite)) as Sprite;
             }
-            else if (checkRange(outCome[spin], 38, 46))
+            else if (_checkRange(outCome[spin], 38, 46))
             { // 13.8% probability
                 betLine[spin] = "Banana";
                 bananas++;
                 GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("banana", typeof(Sprite)) as Sprite;
             }
-            else if (checkRange(outCome[spin], 47, 54))
+            else if (_checkRange(outCome[spin], 47, 54))
             { // 12.3% probability
                 betLine[spin] = "Orange";
                 oranges++;
                 GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("orange", typeof(Sprite)) as Sprite;
             }
-            else if (checkRange(outCome[spin], 55, 59))
+            else if (_checkRange(outCome[spin], 55, 59))
             { //  7.7% probability
                 betLine[spin] = "Cherry";
                 cherries++;
                 GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("cherry", typeof(Sprite)) as Sprite;
             }
-            else if (checkRange(outCome[spin], 60, 62))
+            else if (_checkRange(outCome[spin], 60, 62))
             { //  4.6% probability
                 betLine[spin] = "Bar";
                 bars++;
                 GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("bar", typeof(Sprite)) as Sprite;
             }
-            else if (checkRange(outCome[spin], 63, 64))
+            else if (_checkRange(outCome[spin], 63, 64))
             { //  3.1% probability
                 betLine[spin] = "Bell";
                 bells++;
@@ -176,7 +177,7 @@ public class SlotMachine : MonoBehaviour {
                 GameObject.Find(spin == 0 ? "Scroll1" : (spin == 1 ? "Scroll2" : "Scroll3")).GetComponent<Image>().sprite = Resources.Load("bell", typeof(Sprite)) as Sprite;
 
             }
-            else if (checkRange(outCome[spin], 65, 65))
+            else if (_checkRange(outCome[spin], 65, 65))
             { //  1.5% probability
                 betLine[spin] = "Seven";
                 sevens++;
@@ -190,7 +191,7 @@ public class SlotMachine : MonoBehaviour {
 	}
 
 	/* This function calculates the player's winnings, if any */
-	private void determineWinnings()
+	private void _determineWinnings()
 	{
 		if (blanks == 0)
 		{
@@ -259,21 +260,24 @@ public class SlotMachine : MonoBehaviour {
 				winnings = playerBet * 1;
 			}
 			winNumber++;
-			showWinMessage();
+			_showWinMessage();
             GameObject.Find("Status").GetComponent<Text>().text = "You Win";
             GameObject.Find("WinnerPaid").GetComponent<Text>().text = winnings.ToString();
         }
 		else
 		{
 			lossNumber++;
-			showLossMessage();
+			_showLossMessage();
             GameObject.Find("Status").GetComponent<Text>().text = "You Lost";
             GameObject.Find("WinnerPaid").GetComponent<Text>().text = "0";
         }
 
 	}
 
-	public void OnSpinButtonClick()
+    /// <summary>
+    /// this method will run the entire apllication
+    /// </summary>
+	public void _OnSpinButtonClick()
 	{
 
 		if (playerMoney == 0)
@@ -289,6 +293,7 @@ public class SlotMachine : MonoBehaviour {
 		else if (playerBet > playerMoney)
 		{
 			Debug.Log("You don't have enough Money to place that bet.");
+            //it will show a dialog box will if player bet will be greater than player money
             EditorUtility.DisplayDialog("Not Enough Money", "You don't have enough Money to place that bet", "ok");
 		}
 		else if (playerBet < 0)
@@ -297,12 +302,12 @@ public class SlotMachine : MonoBehaviour {
 		}
 		else if (playerBet <= playerMoney)
 		{
-			spinResult = Reels();
+			spinResult = _Reels();
 			fruits = spinResult[0] + " - " + spinResult[1] + " - " + spinResult[2];
 			Debug.Log(fruits);
-			determineWinnings();
+			_determineWinnings();
 			turn++;
-			showPlayerStats();
+			_showPlayerStats();
 		}
 		else
 		{
@@ -311,11 +316,18 @@ public class SlotMachine : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// this method will set the player bet and send the bet amount to the text of betAmount
+    /// </summary>
+    /// <param name="betAmount"></param>
     public void setPlayerBet(int betAmount)
     {
         this.playerBet = betAmount;
     }
 
+    /// <summary>
+    /// this method will quit the application
+    /// </summary>
     public void quitApllication()
     {
         Application.Quit();
