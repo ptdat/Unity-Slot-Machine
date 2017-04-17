@@ -33,6 +33,7 @@ public class SlotMachine : MonoBehaviour {
     {
         // Display the amount of player bet
         GameObject.Find("BetAmount").GetComponent<Text>().text = this.playerBet.ToString();
+        GameObject.Find("TotalCredits").GetComponent<Text>().text = this.playerMoney.ToString();    
     }
 
 
@@ -89,8 +90,7 @@ public class SlotMachine : MonoBehaviour {
 			Debug.Log("You Won the $" + jackpot + " Jackpot!!");
 			playerMoney += jackpot;
 			jackpot = 1000;
-
-		}
+        }
 	}
 
 	/* Utility function to show a win message and increase player money */
@@ -100,7 +100,7 @@ public class SlotMachine : MonoBehaviour {
 		Debug.Log("You Won: $" + winnings);
 		resetFruitTally();
 		checkJackPot();
-	}
+    }
 
 	/* Utility function to show a loss message and reduce player money */
 	private void showLossMessage()
@@ -256,12 +256,14 @@ public class SlotMachine : MonoBehaviour {
 			}
 			winNumber++;
 			showWinMessage();
-		}
+            GameObject.Find("Status").GetComponent<Text>().text = "You Win";
+        }
 		else
 		{
 			lossNumber++;
 			showLossMessage();
-		}
+            GameObject.Find("Status").GetComponent<Text>().text = "You Lost";
+        }
 
 	}
 
@@ -299,7 +301,8 @@ public class SlotMachine : MonoBehaviour {
 		{
 			Debug.Log("Please enter a valid bet amount");
 		}
-	}
+
+    }
 
     public void setPlayerBet(int betAmount)
     {
