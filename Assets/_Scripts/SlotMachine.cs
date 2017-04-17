@@ -33,7 +33,7 @@ public class SlotMachine : MonoBehaviour {
     {
         // Display the amount of player bet
         GameObject.Find("BetAmount").GetComponent<Text>().text = this.playerBet.ToString();
-        GameObject.Find("TotalCredits").GetComponent<Text>().text = this.playerMoney.ToString();    
+        GameObject.Find("TotalCredits").GetComponent<Text>().text = this.playerMoney.ToString();
     }
 
 
@@ -257,12 +257,14 @@ public class SlotMachine : MonoBehaviour {
 			winNumber++;
 			showWinMessage();
             GameObject.Find("Status").GetComponent<Text>().text = "You Win";
+            GameObject.Find("WinnerPaid").GetComponent<Text>().text = winnings.ToString();
         }
 		else
 		{
 			lossNumber++;
 			showLossMessage();
             GameObject.Find("Status").GetComponent<Text>().text = "You Lost";
+            GameObject.Find("WinnerPaid").GetComponent<Text>().text = "0";
         }
 
 	}
