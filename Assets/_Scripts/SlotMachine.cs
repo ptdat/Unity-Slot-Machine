@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class SlotMachine : MonoBehaviour {
 
@@ -89,7 +90,10 @@ public class SlotMachine : MonoBehaviour {
 		{
 			Debug.Log("You Won the $" + jackpot + " Jackpot!!");
 			playerMoney += jackpot;
-			jackpot = 1000;
+            EditorUtility.DisplayDialog("Jackpot", "You win a jackpot of " + jackpot, "ok");
+            jackpot = 1000;
+
+            
         }
 	}
 
@@ -285,6 +289,7 @@ public class SlotMachine : MonoBehaviour {
 		else if (playerBet > playerMoney)
 		{
 			Debug.Log("You don't have enough Money to place that bet.");
+            EditorUtility.DisplayDialog("Not Enough Money", "You don't have enough Money to place that bet", "ok");
 		}
 		else if (playerBet < 0)
 		{
@@ -309,5 +314,10 @@ public class SlotMachine : MonoBehaviour {
     public void setPlayerBet(int betAmount)
     {
         this.playerBet = betAmount;
+    }
+
+    public void quitApllication()
+    {
+        Application.Quit();
     }
 }
