@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿///<summary>
+///	Name of Programme - Slot Machine
+///	Name - Sahil Verma
+///	Student Number - 200335300
+///	Date Last Modified or app creation date - 17 April , 2017
+///	Short revision history - functionality added, structured, gui for slot machine 
+///	Description - the app calculates the money user wins or lose
+/// </summary>
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEditor;
@@ -282,14 +290,15 @@ public class SlotMachine : MonoBehaviour {
 
 		if (playerMoney == 0)
 		{
-			/*
+            /*
 			if (Debug.Log("You ran out of Money! \nDo you want to play again?","Out of Money!",MessageBoxButtons.YesNo) == DialogResult.Yes)
 			{
 				resetAll();
 				showPlayerStats();
 			}
 			*/
-		}
+            EditorUtility.DisplayDialog("Not Enough Money", "You don't have any money to play", "ok");
+        }
 		else if (playerBet > playerMoney)
 		{
 			Debug.Log("You don't have enough Money to place that bet.");
@@ -299,7 +308,8 @@ public class SlotMachine : MonoBehaviour {
 		else if (playerBet < 0)
 		{
 			Debug.Log("All bets must be a positive $ amount.");
-		}
+            EditorUtility.DisplayDialog("Add player Bet", "You don't have bet amount", "ok");
+        }
 		else if (playerBet <= playerMoney)
 		{
 			spinResult = _Reels();
