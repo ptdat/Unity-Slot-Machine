@@ -86,7 +86,8 @@ public class SlotMachine : MonoBehaviour {
 		winNumber = 0;
 		lossNumber = 0;
 		winRatio = 0.0f;
-	}
+        GameObject.Find("WinnerPaid").GetComponent<Text>().text = "0";
+    }
 
 	/* Check to see if the player won the jackpot */
 	private void _checkJackPot()
